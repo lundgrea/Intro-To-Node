@@ -32,8 +32,14 @@ server.on('request', (request, response) => {
 
 
 
-const getAllMessages = () => {
+const getAllMessages = (response) => {
+  response.writeHead(200, {'Content-Type': 'application/json'});
+  response.write(JSON.stringify(messages));
+  response.end()
 } 
 
-const addMessage = () => {
+const addMessage = (newMessage, response) => {
+  response.writeHead(201, {'Content-Type': 'application/json'});
+  messages = [...messages, newMessage]
+  response.end(JSON.stringify(newMessage));
 }
